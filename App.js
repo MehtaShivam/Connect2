@@ -116,6 +116,15 @@ class ProfilePageScreen extends Component {
             </ScrollView>
           </View>
         </ScrollView>
+        <View style={{flex: 1}}>
+  <View><Text>my text</Text></View>
+  <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+  <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+  <Image source={require('./c.png')} style={{width: 50, height: 50}}/>
+
+  </TouchableOpacity>
+  </View>
+  </View>
       </View>
     )
   }
@@ -149,6 +158,15 @@ class ContactsScreen extends React.PureComponent {
        ]}
        renderItem={({item}) => <Text style={styles_three.item}>{item.key}</Text>}
      />
+     <View style={{flex: 1}}>
+<View><Text>Last page</Text></View>
+<View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+<TouchableOpacity onPress={() => this.props.navigation.navigate('ProfilePage')}>
+<Image source={require('./c.png')} style={{width: 50, height: 50}}/>
+
+</TouchableOpacity>
+</View>
+</View>
    </View>
  );
    }
@@ -267,6 +285,15 @@ class QRCodeScreen extends React.Component {
           size={200}
           bgColor='black'
           fgColor='white'/>
+          <View style={{flex: 1}}>
+    <View><Text>my text</Text></View>
+    <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfilePage')}>
+    <Image source={require('./c.png')} style={{width: 50, height: 50}}/>
+
+    </TouchableOpacity>
+    </View>
+    </View>
       </View>
     );
   };
@@ -277,6 +304,15 @@ class ForgotPasswordScreen extends React.Component {
         return (
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
                 <Text>An email has with a temporary password has been sent.</Text>
+                <View style={{flex: 1}}>
+          <View><Text>my text</Text></View>
+          <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+          <Image source={require('./c.png')} style={{width: 50, height: 50}}/>
+
+          </TouchableOpacity>
+          </View>
+          </View>
             </View>
     );
     }
