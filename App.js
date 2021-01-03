@@ -581,16 +581,6 @@ const styles_four = StyleSheet.create({
    }
 })
 const HomeScreen = ({ navigation }) => {
-//   state = {
-//    email: '',
-//    password: ''
-// }
-// handleEmail = (text) => {
-//    this.setState({ email: text })
-// }
-// handlePassword = (text) => {
-//    this.setState({ password: text })
-// }
   return (
     <React.Fragment>
      <Text style={{fontSize: 40, backgroundColor: '#ADD8e6', textAlign: 'center'}}>Connect</Text>
@@ -633,7 +623,29 @@ const HomeScreen = ({ navigation }) => {
 const ProfileScreen = ({ navigation, route }) => {
   return (
     <View style={{justifyContent: 'center'}}>
+    <Text style={{fontSize: 20, backgroundColor: '#ADD8e6', textAlign: 'center', color: 'white'}}>Shivam Mehta</Text>
     <Image style={{width: 200, height: 200, borderRadius: 200/2, alignSelf: 'center'}} source={require('./SuperSaiyanShiv.png')}/>
+    <TouchableOpacity style = {styles_four.submitButton}
+    onPress = {
+          () => navigation.navigate('Home')
+       }>
+       <Text style = {styles_four.submitButtonText}> Contacts </Text>
+
+    </TouchableOpacity>
+    <TouchableOpacity style = {styles_four.submitButton}
+    onPress = {
+          () => navigation.navigate('Home')
+       }>
+       <Text style = {styles_four.submitButtonText}> Capture </Text>
+
+    </TouchableOpacity>
+    <TouchableOpacity style = {styles_four.submitButton}
+    onPress = {
+          () => navigation.navigate('Home')
+       }>
+       <Text style = {styles_four.submitButtonText}> Share </Text>
+
+    </TouchableOpacity>
     </View>
   );
 };
