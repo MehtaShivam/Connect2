@@ -27,6 +27,7 @@
     "react-native-easy-grid": "^0.2.2",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
+    "react-native-navigation-bar": "^0.2.1",
     "react-native-paper": "^4.5.0",
     "react-native-qrcode-generator": "^1.2.2",
     "react-native-reanimated": "~1.13.0",
@@ -37,7 +38,8 @@
     "react-native-web": "~0.13.12",
     "react-native-webview": "^11.0.2",
     "react-navigation": "^4.4.3",
-    "react-navigation-stack": "^2.10.2"
+    "react-navigation-stack": "^2.10.2",
+    "react-router": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
