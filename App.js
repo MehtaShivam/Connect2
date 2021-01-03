@@ -1,4 +1,5 @@
-import React, { Component, PureComponent } from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { TouchableOpacity, View, Text, Button, TextInput, Image, ScrollView, StyleSheet, FlatList } from 'react-native';
@@ -10,31 +11,111 @@ import Toolbar from './toolbar.component';
 import Gallery from './gallery.component';
 import TextTicker from 'react-native-text-ticker';
 import styles_two from './styles.js';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 class HomeScreen extends React.Component {
+  state = {
+   email: '',
+   password: ''
+}
+handleEmail = (text) => {
+   this.setState({ email: text })
+}
+handlePassword = (text) => {
+   this.setState({ password: text })
+}
+login = () => {
+   this.props.navigation.navigate('ProfilePage')
+}
+forgotPassword =()=>{
+  this.props.navigation.navigate('ForgotPassword')
+}
+signUp =()=>{
+  this.props.navigation.navigate('SignUp')
+}
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{fontSize: 40, backgroundColor: '#ADD8e6'}}>Connect</Text>
-                <TextInput defaultValue='phone number'/>
-                <TextInput defaultValue='password'/>
-                <Button
-                    title="Submit"
-                    onPress={()=> this.props.navigation.navigate('ProfilePage')}
-                />
-                  <Button
-                    title="Forgot Password?"
-                    onPress={()=> this.props.navigation.navigate('ForgotPassword')}
-                />
-                <Button
-                    title="Sign Up"
-                    onPress={() => this.props.navigation.navigate('SignUp')}
-                />
-            </View>
+            // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            //     <Text style={{fontSize: 40, backgroundColor: '#ADD8e6'}}>Connect</Text>
+            //     <TextInput defaultValue='phone number'/>
+            //     <TextInput defaultValue='password'/>
+            //     <Button
+            //         title="Submit"
+            //         onPress={()=> this.props.navigation.navigate('ProfilePage')}
+            //     />
+            //       <Button
+            //         title="Forgot Password?"
+            //         onPress={()=> this.props.navigation.navigate('ForgotPassword')}
+            //     />
+            //     <Button
+            //         title="Sign Up"
+            //         onPress={() => this.props.navigation.navigate('SignUp')}
+            //     />
+            // </View>
+            <View style = {styles_four.container}>
+            <Text style={{fontSize: 40, alignItems: 'center', justifyContent:'center'}}>Connect</Text>
+            <TextInput style = {styles_four.input}
+               underlineColorAndroid = "transparent"
+               placeholder = "Email"
+               placeholderTextColor = "#ADD8e6"
+               autoCapitalize = "none"
+               onChangeText = {this.handleEmail}/>
+
+            <TextInput style = {styles_four.input}
+               underlineColorAndroid = "transparent"
+               placeholder = "Password"
+               placeholderTextColor = "#ADD8e6"
+               autoCapitalize = "none"
+               onChangeText = {this.handlePassword}/>
+
+            <TouchableOpacity
+               style = {styles_four.submitButton}
+               onPress = {
+                  () => this.login(this.state.email, this.state.password)
+               }>
+               <Text style = {styles_four.submitButtonText}> Submit </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+               style = {styles_four.submitButton}
+               onPress = {
+                  () => this.forgotPassword()
+               }>
+               <Text style = {styles_four.submitButtonText}> Forgot Password? </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+               style = {styles_four.submitButton}
+               onPress = {
+                  () => this.signUp()
+               }>
+               <Text style = {styles_four.submitButtonText}> Sign Up </Text>
+            </TouchableOpacity>
+         </View>
         );
     }
 }
-
+const styles_four = StyleSheet.create({
+   container: {
+      paddingTop: 23
+   },
+   input: {
+      margin: 15,
+      height: 40,
+      borderColor: '#ADD8e6',
+      borderWidth: 1
+   },
+   submitButton: {
+      backgroundColor: '#ADD8e6',
+      padding: 10,
+      margin: 15,
+      height: 40,
+   },
+   submitButtonText:{
+      color: 'white',
+      fontSize: 20
+   }
+})
 // class ProfilePageScreen extends React.Component {
 //     render() {
 //         return (
@@ -54,6 +135,33 @@ class HomeScreen extends React.Component {
 //     );
 //     }
 // }
+function ProfileScreen() {
+  return (
+    <Button
+    onPress ={()=> this.props.navigation.navigate('ProfilePage')}
+    />
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <Button
+    onPress={()=> this.props.navigation.navigate('Setttings')}
+    />
+  );
+}
+
+
+const Tab = createBottomTabNavigator();
+
+function myTabs(){
+  return(
+    <Tab.Navigator>
+          <Tab.Screen name="Home" component={ProfileScreen} />
+          <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+  );
+}
 
 class ProfilePageScreen extends Component {
   constructor(props) {
@@ -77,7 +185,7 @@ class ProfilePageScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <Image style={{width: 100, height: 200}} source={require('./SuperSaiyanShiv.png')} />
+        <Image style={{width: 200, height: 200, borderRadius: 200/2}} source={require('./SuperSaiyanShiv.png')} />
         <Button
             title="Settings"
             onPress={()=> alert('You are in the Settings!')}
@@ -116,17 +224,26 @@ class ProfilePageScreen extends Component {
             </ScrollView>
           </View>
         </ScrollView>
-        <View style={{flex: 1}}>
-  <View><Text>my text</Text></View>
-  <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
-  <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-  <Image source={require('./c.png')} style={{width: 50, height: 50}}/>
 
+  <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
+  <TouchableOpacity
+     style = {styles_four.submitButton}
+     onPress = {
+        () => this.props.navigation.navigate('ProfilePage')
+     }>
+     <Text style = {styles_four.submitButtonText}>Profile Page</Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+     style = {styles_four.submitButton}
+     onPress = {
+        () => this.props.navigation.navigate('Contacts')
+     }>
+     <Text style = {styles_four.submitButtonText}>Contact</Text>
   </TouchableOpacity>
   </View>
   </View>
-      </View>
-    )
+
+);
   }
 }
 
@@ -319,28 +436,95 @@ class ForgotPasswordScreen extends React.Component {
 }
 
 class SignUpScreen extends React.Component {
+state = {
+   email: '',
+   password: '',
+   confirmPassword: '',
+   username: '',
+   phoneNumber: ''
+}
+handleEmail = (text) => {
+   this.setState({ email: text })
+}
+handlePassword = (text) => {
+   this.setState({ password: text })
+}
+handleConfirmPassword = (text) => {
+  this.setState({ confirmPassword: text})
+}
+handleUsername = (text) => {
+  this.setState({ username: text})
+}
+handlePhoneNumber = (text) => {
+  this.setState({ phoneNumber: text})
+}
+submit = () => {
+   this.props.navigation.navigate('Home')
+}
     render() {
         return (
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <TextInput defaultValue='Email'/>
-                <TextInput defaultValue='Username'/>
-                <TextInput defaultValue='Password'/>
-                <TextInput defaultValue='Phone Number'/>
-                <Button
-                    title="Submit"
-                    onPress={() => this.props.navigation.navigate('Home')}
-                />
-                <View style={{flex: 1}}>
-          <View><Text>my text</Text></View>
-          <View style={{position: 'absolute', left: 0, right: 0, bottom: 0}}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-          <Image source={require('./c.png')} style={{width: 50, height: 50}}/>
+            // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            //     <Text style={{fontSize: 40, backgroundColor: '#ADD8e6'}}>Connect</Text>
+            //     <TextInput defaultValue='phone number'/>
+            //     <TextInput defaultValue='password'/>
+            //     <Button
+            //         title="Submit"
+            //         onPress={()=> this.props.navigation.navigate('ProfilePage')}
+            //     />
+            //       <Button
+            //         title="Forgot Password?"
+            //         onPress={()=> this.props.navigation.navigate('ForgotPassword')}
+            //     />
+            //     <Button
+            //         title="Sign Up"
+            //         onPress={() => this.props.navigation.navigate('SignUp')}
+            //     />
+            // </View>
+            <View style = {styles_four.container}>
+            <Text style={{fontSize: 40, alignItems: 'center', justifyContent:'center'}}>Sign Up</Text>
+            <TextInput style = {styles_four.input}
+               underlineColorAndroid = "transparent"
+               placeholder = "Email"
+               placeholderTextColor = "#ADD8e6"
+               autoCapitalize = "none"
+               onChangeText = {this.handleEmail}/>
 
-          </TouchableOpacity>
-          </View>
-          </View>
-            </View>
-    );
+            <TextInput style = {styles_four.input}
+               underlineColorAndroid = "transparent"
+               placeholder = "Password"
+               placeholderTextColor = "#ADD8e6"
+               autoCapitalize = "none"
+               onChangeText = {this.handlePassword}/>
+
+           <TextInput style = {styles_four.input}
+              underlineColorAndroid = "transparent"
+              placeholder = "Confirm Password"
+              placeholderTextColor = "#ADD8e6"
+              autoCapitalize = "none"
+              onChangeText = {this.handleConfirmPassword}/>
+
+          <TextInput style = {styles_four.input}
+             underlineColorAndroid = "transparent"
+             placeholder = "Username"
+             placeholderTextColor = "#ADD8e6"
+             autoCapitalize = "none"
+             onChangeText = {this.handleUsername}/>
+         <TextInput style = {styles_four.input}
+            underlineColorAndroid = "transparent"
+            placeholder = "Phone Number"
+            placeholderTextColor = "#ADD8e6"
+            autoCapitalize = "none"
+            onChangeText = {this.handlePhoneNumber}/>
+           <TouchableOpacity
+                  style = {styles_four.submitButton}
+                  onPress = {
+                     () => this.submit()
+                  }>
+                  <Text style = {styles_four.submitButtonText}> Submit </Text>
+               </TouchableOpacity>
+
+         </View>
+        );
     }
 }
 
@@ -365,5 +549,8 @@ const AppContainer = createAppContainer(AppNavigator);
 export default class App extends React.Component {
     render() {
         return <AppContainer />;
+        <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>;
     }
 }
