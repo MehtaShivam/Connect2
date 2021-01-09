@@ -551,171 +551,202 @@
 // }
 
 //v2
-import 'react-native-gesture-handler';
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableOpacity, View, Text, Button, TextInput, Image, ScrollView, StyleSheet, FlatList } from 'react-native';
+// import 'react-native-gesture-handler';
+// import * as React from 'react';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+// import { TouchableOpacity, View, Text, Button, TextInput, Image, ScrollView, StyleSheet, FlatList } from 'react-native';
+// import * as firebase from 'firebase';
+// import Home from './HomeScreen';
+//
+// const Stack = createStackNavigator();
+//
+// const styles_four = StyleSheet.create({
+//    container: {
+//       paddingTop: 23
+//    },
+//    input: {
+//       margin: 15,
+//       height: 40,
+//       borderColor: '#ADD8e6',
+//       borderWidth: 1
+//    },
+//    submitButton: {
+//       backgroundColor: '#ADD8e6',
+//       padding: 10,
+//       margin: 15,
+//       height: 40,
+//    },
+//    submitButtonText:{
+//       color: 'white',
+//       fontSize: 20
+//    }
+// })
+//
+//
+// const HomeScreen = ({ navigation }) => {
+//   return (
+//     <React.Fragment>
+//      <Text style={{fontSize: 40, backgroundColor: '#ADD8e6', textAlign: 'center'}}>Connect</Text>
+//      <TextInput style = {styles_four.input}
+//       placeholder = "Email"
+//       placeholderTextColor = "#ADD8e6"
+//       />
+//
+//    <TextInput style = {styles_four.input}
+//       underlineColorAndroid = "transparent"
+//       placeholder = "Password"
+//       placeholderTextColor = "#ADD8e6"
+//     />
+//
+//    <TouchableOpacity
+//       style = {styles_four.submitButton}
+//       onPress = {
+//          () => navigation.navigate('Profile', { name: 'Jane' })
+//       }>
+//       <Text style = {styles_four.submitButtonText}> Submit </Text>
+//    </TouchableOpacity>
+//    <TouchableOpacity
+//       style = {styles_four.submitButton}
+//       onPress = {
+//          () => navigation.navigate('Forgot Password')
+//       }>
+//       <Text style = {styles_four.submitButtonText}> Forgot Password? </Text>
+//    </TouchableOpacity>
+//    <TouchableOpacity
+//       style = {styles_four.submitButton}
+//       onPress = {
+//          () => navigation.navigate('Sign Up')
+//       }>
+//       <Text style = {styles_four.submitButtonText}> Sign Up </Text>
+//    </TouchableOpacity>
+//    </React.Fragment>
+//   );
+// };
+//
+// const ProfileScreen = ({ navigation, route }) => {
+//   return (
+//     <View style={{justifyContent: 'center'}}>
+//     <Text style={{fontSize: 20, backgroundColor: '#ADD8e6', textAlign: 'center', color: 'white'}}>Shivam Mehta</Text>
+//     <Image style={{width: 200, height: 200, borderRadius: 200/2, alignSelf: 'center'}} source={require('./SuperSaiyanShiv.png')}/>
+//     <TouchableOpacity style = {styles_four.submitButton}
+//     onPress = {
+//           () => navigation.navigate('Contacts')
+//        }>
+//        <Text style = {styles_four.submitButtonText}> Contacts </Text>
+//
+//     </TouchableOpacity>
+//     <TouchableOpacity style = {styles_four.submitButton}
+//     onPress = {
+//           () => navigation.navigate('Capture')
+//        }>
+//        <Text style = {styles_four.submitButtonText}> Capture </Text>
+//
+//     </TouchableOpacity>
+//     <TouchableOpacity style = {styles_four.submitButton}
+//     onPress = {
+//           () => navigation.navigate('Share')
+//        }>
+//        <Text style = {styles_four.submitButtonText}> Share </Text>
+//
+//     </TouchableOpacity>
+//     </View>
+//   );
+// };
+//
+// const ForgotPasswordScreen = ({ navigation, route }) => {
+//   return (
+//     <TouchableOpacity style = {styles_four.submitButton}
+//     onPress = {
+//           () => navigation.navigate('Home')
+//        }>
+//        <Text style = {styles_four.submitButtonText}> An email with a temporary password has been sent. </Text>
+//     </TouchableOpacity>
+//   );
+// };
+//
+// const SignUpScreen = ({ navigation, route }) => {
+//   return (
+//     <React.Fragment>
+//     <TextInput style = {styles_four.input}
+//      placeholder = "Phone Number"
+//      placeholderTextColor = "#ADD8e6"
+//      autoCapitalize = "none"
+//      />
+//     <TextInput style = {styles_four.input}
+//      placeholder = "Email"
+//      placeholderTextColor = "#ADD8e6"
+//      autoCapitalize = "none"
+//      />
+//    <TextInput style = {styles_four.input}
+//     placeholder = "Username"
+//     placeholderTextColor = "#ADD8e6"
+//     autoCapitalize = "none"
+//     />
+//   <TextInput style = {styles_four.input}
+//    placeholder = "Password"
+//    placeholderTextColor = "#ADD8e6"
+//    autoCapitalize = "none"
+//    />
+//    <TextInput style = {styles_four.input}
+//     placeholder = "Confirm Password"
+//     placeholderTextColor = "#ADD8e6"
+//     autoCapitalize = "none"
+//     />
+//     <TouchableOpacity style = {styles_four.submitButton}
+//     onPress = {
+//           () => navigation.navigate('Home')
+//        }>
+//        <Text style = {styles_four.submitButtonText}> Submit </Text>
+//     </TouchableOpacity>
+//     </React.Fragment>
+//   );
+// };
+// const ContactsScreen = ({ navigation, route }) => {
+//   return (
+//     <React.Fragment>
+//     <Text>This is the contacts screen</Text>
+//     </React.Fragment>
+//   );
+// };
+// const CaptureScreen = ({ navigation, route }) => {
+//   return (
+//     <React.Fragment>
+//     <Text>This is the capture screen</Text>
+//     </React.Fragment>
+//   );
+// };
+// const ShareScreen = ({ navigation, route }) => {
+//   return (
+//     <React.Fragment>
+//     <Text>This is the share screen</Text>
+//     </React.Fragment>
+//   );
+// };
+// const AppContainer = createAppContainer(AppNavigator);
+// const App = () => {
+//   return (
+//     <NavigationContainer>
+//     <Stack.Navigator>
+//     <Stack.Screen
+//         name="Home"
+//         component={HomeScreen}
+//         options={{ title: 'Welcome' }}
+//       />
+//       <Stack.Screen name="Profile" component={ProfileScreen} />
+//       <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen} />
+//       <Stack.Screen name="Sign Up" component={SignUpScreen} />
+//       <Stack.Screen name="Contacts" component={ContactsScreen}/>
+//       <Stack.Screen name="Capture" component={CaptureScreen}/>
+//       <Stack.Screen name="Share" component={ShareScreen}/>
+//     </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
+//
+// export default App;
 
-const Stack = createStackNavigator();
 
-const styles_four = StyleSheet.create({
-   container: {
-      paddingTop: 23
-   },
-   input: {
-      margin: 15,
-      height: 40,
-      borderColor: '#ADD8e6',
-      borderWidth: 1
-   },
-   submitButton: {
-      backgroundColor: '#ADD8e6',
-      padding: 10,
-      margin: 15,
-      height: 40,
-   },
-   submitButtonText:{
-      color: 'white',
-      fontSize: 20
-   }
-})
-const HomeScreen = ({ navigation }) => {
-  return (
-    <React.Fragment>
-     <Text style={{fontSize: 40, backgroundColor: '#ADD8e6', textAlign: 'center'}}>Connect</Text>
-     <TextInput style = {styles_four.input}
-      placeholder = "Email"
-      placeholderTextColor = "#ADD8e6"
-      />
-
-   <TextInput style = {styles_four.input}
-      underlineColorAndroid = "transparent"
-      placeholder = "Password"
-      placeholderTextColor = "#ADD8e6"
-    />
-
-   <TouchableOpacity
-      style = {styles_four.submitButton}
-      onPress = {
-         () => navigation.navigate('Profile', { name: 'Jane' })
-      }>
-      <Text style = {styles_four.submitButtonText}> Submit </Text>
-   </TouchableOpacity>
-   <TouchableOpacity
-      style = {styles_four.submitButton}
-      onPress = {
-         () => navigation.navigate('Forgot Password')
-      }>
-      <Text style = {styles_four.submitButtonText}> Forgot Password? </Text>
-   </TouchableOpacity>
-   <TouchableOpacity
-      style = {styles_four.submitButton}
-      onPress = {
-         () => navigation.navigate('Sign Up')
-      }>
-      <Text style = {styles_four.submitButtonText}> Sign Up </Text>
-   </TouchableOpacity>
-   </React.Fragment>
-  );
-};
-
-const ProfileScreen = ({ navigation, route }) => {
-  return (
-    <View style={{justifyContent: 'center'}}>
-    <Text style={{fontSize: 20, backgroundColor: '#ADD8e6', textAlign: 'center', color: 'white'}}>Shivam Mehta</Text>
-    <Image style={{width: 200, height: 200, borderRadius: 200/2, alignSelf: 'center'}} source={require('./SuperSaiyanShiv.png')}/>
-    <TouchableOpacity style = {styles_four.submitButton}
-    onPress = {
-          () => navigation.navigate('Home')
-       }>
-       <Text style = {styles_four.submitButtonText}> Contacts </Text>
-
-    </TouchableOpacity>
-    <TouchableOpacity style = {styles_four.submitButton}
-    onPress = {
-          () => navigation.navigate('Home')
-       }>
-       <Text style = {styles_four.submitButtonText}> Capture </Text>
-
-    </TouchableOpacity>
-    <TouchableOpacity style = {styles_four.submitButton}
-    onPress = {
-          () => navigation.navigate('Home')
-       }>
-       <Text style = {styles_four.submitButtonText}> Share </Text>
-
-    </TouchableOpacity>
-    </View>
-  );
-};
-
-const ForgotPasswordScreen = ({ navigation, route }) => {
-  return (
-    <TouchableOpacity style = {styles_four.submitButton}
-    onPress = {
-          () => navigation.navigate('Home')
-       }>
-       <Text style = {styles_four.submitButtonText}> An email with a temporary password has been sent. </Text>
-    </TouchableOpacity>
-  );
-};
-const SignUpScreen = ({ navigation, route }) => {
-  return (
-    <React.Fragment>
-    <TextInput style = {styles_four.input}
-     placeholder = "Phone Number"
-     placeholderTextColor = "#ADD8e6"
-     autoCapitalize = "none"
-     />
-    <TextInput style = {styles_four.input}
-     placeholder = "Email"
-     placeholderTextColor = "#ADD8e6"
-     autoCapitalize = "none"
-     />
-   <TextInput style = {styles_four.input}
-    placeholder = "Username"
-    placeholderTextColor = "#ADD8e6"
-    autoCapitalize = "none"
-    />
-  <TextInput style = {styles_four.input}
-   placeholder = "Password"
-   placeholderTextColor = "#ADD8e6"
-   autoCapitalize = "none"
-   />
-   <TextInput style = {styles_four.input}
-    placeholder = "Confirm Password"
-    placeholderTextColor = "#ADD8e6"
-    autoCapitalize = "none"
-    />
-    <TouchableOpacity style = {styles_four.submitButton}
-    onPress = {
-          () => navigation.navigate('Home')
-       }>
-       <Text style = {styles_four.submitButtonText}> Submit </Text>
-    </TouchableOpacity>
-    </React.Fragment>
-  );
-};
-
-const App = () => {
-  return (
-    <NavigationContainer>
-    <Stack.Navigator>
-    <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ title: 'Welcome' }}
-      />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen} />
-      <Stack.Screen name="Sign Up" component={SignUpScreen} />
-    </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-
-export default App;
 
 //v3
 // import React from 'react';
@@ -751,3 +782,51 @@ export default App;
 //      );
 //    }
 //  }
+
+//v5
+
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { TouchableOpacity, View, Text, Button, TextInput, Image, ScrollView, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import * as firebase from 'firebase';
+import Home from './HomeScreen';
+import Profile from './ProfilePageScreen';
+import ForgotPassword from './ForgotPasswordScreen';
+import SignUp from './SignUpScreen';
+import Contacts from './ContactsScreen';
+import Capture from './CaptureScreen';
+import Share from './ShareScreen';
+import Settings from './SettingsScreen';
+import ApiKeys from './ApiKeys';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import NavAndDrawer from './NavBar2';
+
+
+const Stack = createStackNavigator();
+
+export default class App extends React.Component {
+  constructor(props){
+    super(props)
+  if(!firebase.apps.length){firebase.initializeApp(ApiKeys.firebaseConfig);}
+  }
+    render() {
+        return (
+          <NavigationContainer >
+            <Stack.Navigator>
+            <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{headerShown: false}}
+              />
+
+              <Stack.Screen name="NavBar" component={NavAndDrawer} options={{
+                headerShown: false
+              }}/>
+            </Stack.Navigator>
+            </NavigationContainer>
+          );
+    }
+}
