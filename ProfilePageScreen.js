@@ -41,7 +41,7 @@ function Profile(props) {
   );
   const [image, setImage] = useState(null);
   const [showButton, setShowButton] = useState(true);
-
+  const [profileName, setProfileName] = useState();
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -75,10 +75,18 @@ function Profile(props) {
     <ScrollView horizontal={true}>
     <View style={{alignItems: 'center', justifyContent: 'center', paddingLeft: 50}}>
       <ScrollView horizontal={true}>
+      <View>
+      <TextInput style = {styles_four.input}
+       placeholder = "Profile Name"
+       placeholderTextColor = "#ADD8e6"
+       autoCapitalize = "none"
+       onChangeText={text=>setProfileName(text)}
+       />
       {showButton &&
         <Button title="Pick an image from camera roll" onPress={pickImage} />
       }
       {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, borderRadius:200/2 }} />}
+      </View>
       </ScrollView>
       <ScrollView horizontal={true}>
       <FlatList

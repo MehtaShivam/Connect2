@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, SafeAreaView, Alert} from 'react-native';
 import * as firebase from 'firebase';
 
 function Home(props) {
   const { navigation } = props
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const signInUser = () =>
+    firebase.auth().signInWithEmailAndPassword(email, password).then((user) =>{
+  {navigation.navigate('NavBar')}
+  }).catch((error) => {
+  Alert.alert('Email or Password is incorrect')
+  });
 
   // submit = () => {
   //   firebase.auth().signInWithEmailAndPassword(email, password)
@@ -13,7 +19,7 @@ function Home(props) {
 
   return (
     <SafeAreaView>
-         <Text style={{fontSize: 40, backgroundColor: '#ADD8e6', textAlign: 'center'}}>Connect</Text>
+         <Text style={{fontSize: 40, backgroundColor: '#ADD8e6', textAlign: 'center', color: 'white'}}>Connect</Text>
          <TextInput style = {styles_four.input}
           placeholder = "Email"
           placeholderTextColor = "#ADD8e6"
@@ -29,25 +35,23 @@ function Home(props) {
 
        <TouchableOpacity
           style = {styles_four.submitButton}
-          onPress = { () => firebase.auth().signInWithEmailAndPassword(email, password).then(() =>{
-        {navigation.navigate('NavBar')}
-      }) }
+          onPress = {signInUser}
           >
-          <Text style = {styles_four.submitButtonText}> Submit </Text>
+          <Text style = {styles_four.submitButtonText}>Submit</Text>
        </TouchableOpacity>
        <TouchableOpacity
           style = {styles_four.submitButton}
           onPress = {
              () => navigation.navigate('Forgot Password')
           }>
-          <Text style = {styles_four.submitButtonText}> Forgot Password? </Text>
+          <Text style = {styles_four.submitButtonText}>Forgot Password?</Text>
        </TouchableOpacity>
        <TouchableOpacity
           style = {styles_four.submitButton}
           onPress = {
              () => navigation.navigate('Sign Up')
           }>
-          <Text style = {styles_four.submitButtonText}> Sign Up </Text>
+          <Text style = {styles_four.submitButtonText}>Sign Up</Text>
        </TouchableOpacity>
        </SafeAreaView>
   )
@@ -70,8 +74,9 @@ const styles_four = StyleSheet.create({
       height: 40,
    },
    submitButtonText:{
+      textAlign: 'center',
       color: 'white',
-      fontSize: 20
+      fontSize: 16
    }
 })
 

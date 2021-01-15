@@ -1,10 +1,28 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Button, Alert} from 'react-native'
+import * as firebase from 'firebase';
 
-function Settings(props) {
-  const { navigation } = props
+function Settings({navigation}) {
+  const signOutUser = () => firebase.auth().signOut().then(() => {
+   // Sign-out successful.
+   navigation.navigate('Home')
+ }).catch((error) => {
+   Alert.alert('An Error Occured')
+ });
   return (
-    <SafeAreaView style={{flex: 1}}><Text>{props.name}</Text></SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
+    <Button
+      title='Add Profile'
+      onPress={()=>navigation.navigate('AddProfile')}
+    />
+    <Button
+      title='Remove Profile'
+    />
+    <Button
+      title='Log Off'
+      onPress={signOutUser}
+    />
+    </SafeAreaView>
   )
 }
 

@@ -1,15 +1,31 @@
-import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native'
+import React, {useState} from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, SafeAreaView, Alert} from 'react-native'
+import * as firebase from 'firebase';
 
 function ForgotPassword(props) {
   const { navigation } = props
+  const [email, setEmail] = useState(null);
+  const forgotPassword = () => {
+    navigation.navigate('Home')
+    firebase.auth().sendPasswordResetEmail(email).then(() =>{
+      Alert.alert('An email has been sent')
+  }).catch((error) => {
+      Alert.alert('Email is incorrect or not found')
+  });
+  }
   return (
+    <SafeAreaView>
+    <Text style={{fontSize: 40, backgroundColor: '#ADD8e6', textAlign: 'center', color: 'white'}}>Connect</Text>
+    <TextInput style = {styles_four.input}
+     placeholder = "Email"
+     placeholderTextColor = "#ADD8e6"
+     onChangeText = {text=>setEmail(text)}
+     />
     <TouchableOpacity style = {styles_four.submitButton}
-        onPress = {
-              () => navigation.navigate('Home')
-           }>
-           <Text style = {styles_four.submitButtonText}> An email with a temporary password has been sent. </Text>
+        onPress = {forgotPassword}>
+           <Text style = {styles_four.submitButtonText}>Submit</Text>
         </TouchableOpacity>
+      </SafeAreaView>
   )
 }
 
@@ -30,8 +46,9 @@ const styles_four = StyleSheet.create({
       height: 40,
    },
    submitButtonText:{
+      textAlign: 'center',
       color: 'white',
-      fontSize: 20
+      fontSize: 16
    }
 })
 export default ForgotPassword

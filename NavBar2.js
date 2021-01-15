@@ -9,13 +9,13 @@ import ContactsPage from './ContactsScreen';
 import ProfilePage from './ProfilePageScreen';
 import CapturePage from './CaptureScreen';
 import SharePage from './ShareScreen';
-import SignOut from './SignOut';
+import SettingsPage from './SettingsScreen';
 import Header from './Header';
 import * as firebase from 'firebase';
 
 const Tab = createBottomTabNavigator();
 
-function SettingsScreen() {
+function MoreContentScreen() {
   return (
     <Tab.Navigator
     initialRouteName="Profile"
@@ -34,23 +34,23 @@ function SettingsScreen() {
         iconName = focused
         ? 'ios-camera'
         : 'ios-camera-outline';
-      } else if (route.name === 'Share') {
+      } else if (route.name === 'Settings') {
         iconName = focused
-        ? 'ios-share'
-        : 'ios-share-outline';
+        ? 'ios-settings'
+        : 'ios-settings-outline';
       }
 return <Ionicons name={iconName} size={size} color={color}     />;
         },
       })}
       tabBarOptions={{
-      activeTintColor: 'tomato',
+      activeTintColor: '#ADD8e6',
       inactiveTintColor: 'gray',
       }}
     >
         <Tab.Screen name="Contacts" component={ContactsScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
         <Tab.Screen name="Capture" component={CaptureScreen} />
-        <Tab.Screen name="Share" component={ShareScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 }
@@ -113,28 +113,28 @@ function CaptureDetailsScreen({navigation}) {
 }
 
 
-function ShareScreen() {
+function SettingsScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Share" component={ShareDetailsScreen} options={({ navigation }) => ({
-        headerLeft: () => <Header navigation={navigation} title="Share"/>})}/>
+      <Stack.Screen name="Settings" component={SettingsDetailsScreen} options={({ navigation }) => ({
+        headerLeft: () => <Header navigation={navigation} title="Settings"/>})}/>
     </Stack.Navigator>
   );
 }
 
-function ShareDetailsScreen({navigation}) {
+function SettingsDetailsScreen({navigation}) {
   return (
-    <SharePage/>
+    <SettingsPage navigation={navigation}/>
   );
 }
 
 
 const Drawer = createDrawerNavigator();
+
 export default function NavAndDrawer() {
   return (
       <Drawer.Navigator initialRouteName="Settings">
-        <Drawer.Screen name="Settings" component={SettingsScreen} />
-        <Drawer.Screen name="Log Off" component={LogOffScreen} />
+        <Drawer.Screen name="More Content Coming" component={MoreContentScreen} />
       </Drawer.Navigator>
   )
 }
