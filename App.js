@@ -789,10 +789,11 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableOpacity, View, Text, Button, TextInput, Image, ScrollView, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { TouchableOpacity, View, Text, Button, TextInput, Image, ScrollView, StyleSheet, FlatList, SafeAreaView, Alert } from 'react-native';
 import * as firebase from 'firebase';
 import Home from './HomeScreen';
 import ForgotPassword from './ForgotPasswordScreen';
+import Share from './ShareScreen';
 import SignUp from './SignUpScreen';
 import AddProfile from './AddProfileScreen';
 import ApiKeys from './ApiKeys';
@@ -800,17 +801,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import NavAndDrawer from './NavBar2';
 
-
 const Stack = createStackNavigator();
-
 
 export default class App extends React.Component {
   constructor(props){
     super(props)
-  if(!firebase.apps.length){firebase.initializeApp(ApiKeys.firebaseConfig);}
+    if(!firebase.apps.length){
+      firebase.initializeApp(ApiKeys.firebaseConfig);
+    }
   }
     render() {
-        const {navigation} = this.props
         return (
           <NavigationContainer >
             <Stack.Navigator>
@@ -826,19 +826,22 @@ export default class App extends React.Component {
               <Stack.Screen name="AddProfile" component={AddProfile} options={{
                 headerShown: false
               }}/>
+              <Stack.Screen name="Share" component={Share} options={{
+                headerShown: false
+              }}/>
               <Stack.Screen name="Forgot Password" component={ForgotPassword} options={{
                 headerLeft: () => (
                   <Button
                   title='Back'
                   color="#ADD8e6"
-                   onPress={ () => navigation.navigate('Home')  }
+                   onPress={()=> Alert.alert("Needs functionality")}
                    />
                  ),
               }}/>
               <Stack.Screen name="Sign Up" component={SignUp} options={{
                 headerLeft: () => (
                   <Button
-                    onPress={() => navigation.goBack('Home')}
+                    onPress={()=> Alert.alert("Needs functionality") }
                     title="Back"
                     color="#ADD8e6"
                   />

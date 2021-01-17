@@ -8,19 +8,6 @@ function SignUp(props) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-  const validate =()=>{
-    if(password.length < 8){
-      setValidatePassword(true)
-    }else if (password.search(/[a-z]/i) < 0){
-      setValidatePassword(true)
-    }else if (password.search(/[0-9]/)<0){
-      setValidatePassword(true)
-    }else if (password.search(/[!@#$%^&*()]/) < 0){
-      setValidatePassword(true)
-    }else{
-      setValidatePassword(false)
-    }
-  }
   const createUser = () =>{
     if(password.length < 8){
       Alert.alert("Password must have more than 8 characters");
@@ -51,9 +38,6 @@ function SignUp(props) {
       }
     }
   }
-  // submit = () => {
-  //   firebase.auth().createUserWithEmailAndPassword(email, password)
-  // }
 
   return (
     <SafeAreaView>
