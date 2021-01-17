@@ -12,37 +12,16 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome, Ionicons, FontAwesomeIcon} from '@expo/vector-icons';
 
-// const DATA = [
-//   {
-//     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-//     title: 'First Item',
-//   },
-//   {
-//     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-//     title: 'Second Item',
-//   },
-//   {
-//     id: '58694a0f-3da1-471f-bd96-145571e29d72',
-//     title: 'Third Item',
-//   },
-// ];
-
-// const Item = ({ title }) => (
-//   <View style={styles.item}>
-//     <Text style={styles.title}>{title}</Text>
-//   </View>
-// );
-
+const OPTIONS = ["Cancel", "Instagram", "Facebook", "Snapchat", "WhatsApp", "Email", "Phone Number", "Add Account", "Connect"]
 function Profile() {
   const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState('Profile');
-  // const renderItem = ({ item }) => (
-  //   <Item title={item.title} />
-  // );
   const [image, setImage] = useState(null);
   const [showButton, setShowButton] = useState(true);
   const [profileName, setProfileName] = useState();
+
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -88,19 +67,19 @@ function Profile() {
   const pickAccount = () =>
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: ["Cancel", "Instagram", "Facebook", "Snapchat", "WhatsApp", "Email", "Phone Number", "Connect"],
-        destructiveButtonIndex: 7,
+        options: OPTIONS,
+        destructiveButtonIndex: 8,
         cancelButtonIndex: 0
       },
       buttonIndex => {
         if (buttonIndex === 0) {
           // cancel action
-        }else if (buttonIndex === 1){
-          setResult("Instagram")
         }else if (buttonIndex === 7){
+          setResult("Add functionality")
+        }else if (buttonIndex === 8){
           setResult("Account")
         }else{
-          setResult("Add functionality")
+          setResult(OPTIONS[buttonIndex])
         }
       }
     );
@@ -119,45 +98,50 @@ function Profile() {
                textAlign='center'
                />
               {showButton &&
-                <TouchableOpacity
-                   style = {styles_four.submitButton}
-                   onPress = {pickImage}
-                   >
-                   <Text style = {styles_four.submitButtonText}>Upload profile picture</Text>
-                </TouchableOpacity>
+                <FontAwesome.Button name="upload" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={pickImage}>
+                  Upload Photo
+                </FontAwesome.Button>
               }
+              <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+
               {image &&
-                <View style={{shadowRadius: 4, shadowOpacity: 0.8, shadowColor: "#ADD8e6", shadowOffset: { width: 0, height: 2 }}}>
-                <Image source={{ uri: image }} style={{ width: 200, height: 200, borderRadius:200/2, borderWidth: 1, margin: 10 }}
+                <View style={{shadowRadius: 4, shadowOpacity: 0.8, shadowColor: "#ADD8e6", shadowOffset: { width: 0, height: 2 }, alignItems: 'center', justifyContent: 'center'}}>
+                <Image source={{ uri: image }} style={{ width: 200, height: 200, borderRadius:200/2, borderWidth: 1, margin: 10, borderColor: "#ADD8e6" }}
                 />
                 </View>
               }
-              <TouchableOpacity
-                 style = {styles_four.submitButton}
-                 onPress = {()=> navigation.navigate('Share')}
-                 >
-                 <Text style = {styles_four.submitButtonText}>Share</Text>
-              </TouchableOpacity>
-              <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity
-                 style = {styles_four.submitButton}
-                 onPress = {()=>Alert.alert("Add functionality")}
-                 >
-                 <Text style = {styles_four.submitButtonText}>Add Profile</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                 style = {styles_four.submitButton}
-                 onPress = {()=>Alert.alert("Add functionality")}
-                 >
-                 <Text style = {styles_four.submitButtonText}>Remove Profile</Text>
-              </TouchableOpacity>
+              {image &&
+                <TouchableOpacity
+                  style={{borderWidth:1,
+                         borderColor:'#ADD8e6',
+                         alignItems:'center',
+                         justifyContent:'center',
+                         width:50,
+                         height:50,
+                         backgroundColor:'#ADD8e6',
+                         borderRadius:50/2,
+                         position:'absolute',
+                         right: 25,
+                         bottom: 15}}
+                  onPress={pickImage}
+                  >
+                  <Ionicons name="camera-outline" size={32} color="white" />
+                </TouchableOpacity>}
               </View>
-              <TouchableOpacity
-                 style = {styles_four.submitButton}
-                 onPress = {addElement}
-                 >
-                 <Text style = {styles_four.submitButtonText}>Add Contact Information</Text>
-              </TouchableOpacity>
+              <FontAwesome.Button name="qrcode" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={()=> navigation.navigate('Share')}>
+                Share
+              </FontAwesome.Button>
+              <View style={{flexDirection: 'row'}}>
+              <FontAwesome.Button name="address-card" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={()=> Alert.alert("Add functionality")}>
+                Add Profile
+              </FontAwesome.Button>
+              <FontAwesome.Button name="trash" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={()=> Alert.alert("Add functionality")}>
+                Remove Profile
+              </FontAwesome.Button>
+              </View>
+              <FontAwesome.Button name="plus" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={addElement}>
+                Add Contact Information
+              </FontAwesome.Button>
             </View>
           </ScrollView>
           <View style={{maxHeight: "27%"}}>
@@ -222,6 +206,7 @@ const styles_four = StyleSheet.create({
       backgroundColor: '#ADD8e6',
       padding: 10,
       height: 40,
+      margin: 1,
    },
    submitButtonText:{
       color: 'white',
