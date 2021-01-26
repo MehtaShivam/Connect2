@@ -84,13 +84,31 @@ function Profile() {
       }
     );
 
+  const renderItem = ({item}) => {
+    return (
+    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+      <TouchableOpacity
+         style = {styles_four.submitButton}
+         onPress = {pickAccount}
+         >
+         <Text style = {styles_four.submitButtonText}>{result}</Text>
+      </TouchableOpacity>
+      <TextInput
+       style = {styles_four.input}
+       placeholder = {item.TextInput}
+       placeholderTextColor = "#ADD8e6"
+      />
+    </View>
+  );
+  };
   return (
     <SafeAreaView style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
       <ScrollView horizontal={true}>
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{flex: 1}}>
           <ScrollView style={{flex: 1}} horizontal={true}>
-            <View>
-              <TextInput style = {styles_four.input, {margin: 15}}
+            <View style={{margin: 5}}>
+              <TextInput style = {styles_four.input, {margin: 10}}
                placeholder = "Profile Name"
                placeholderTextColor = "#ADD8e6"
                autoCapitalize = "none"
@@ -128,46 +146,37 @@ function Profile() {
                   <Ionicons name="camera-outline" size={32} color="white" />
                 </TouchableOpacity>}
               </View>
-              <FontAwesome.Button name="qrcode" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={()=> navigation.navigate('Share')}>
+              <View style={{margin: 1}}>
+              <FontAwesome.Button name="qrcode" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center'}} onPress={()=> navigation.navigate('Share')}>
                 Share
               </FontAwesome.Button>
-              <View style={{flexDirection: 'row'}}>
-              <FontAwesome.Button name="address-card" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={()=> Alert.alert("Add functionality")}>
+              </View>
+              <View style={{flexDirection: 'row', margin: 1}}>
+              <FontAwesome.Button name="address-card" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center'}} onPress={()=> Alert.alert("Add functionality")}>
                 Add Profile
               </FontAwesome.Button>
-              <FontAwesome.Button name="trash" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={()=> Alert.alert("Add functionality")}>
+              <FontAwesome.Button name="trash" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center'}} onPress={()=> Alert.alert("Add functionality")}>
                 Remove Profile
               </FontAwesome.Button>
               </View>
-              <FontAwesome.Button name="plus" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center', margin: 5}} onPress={addElement}>
+              <View style={{margin: 1}}>
+              <FontAwesome.Button name="plus" backgroundColor="#ADD8e6" style={{alignItems: 'center', justifyContent: 'center'}} onPress={addElement}>
                 Add Contact Information
               </FontAwesome.Button>
+              </View>
             </View>
           </ScrollView>
+          </View>
           <View style={{maxHeight: "27%"}}>
             <FlatList
               style={{flexGrow: 0}}
               keyExtractor = {item => item.id}
               data={exampleState}
-              renderItem = {item => (
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                  <TouchableOpacity
-                     style = {styles_four.submitButton}
-                     onPress = {pickAccount}
-                     >
-                     <Text style = {styles_four.submitButtonText}>{result}</Text>
-                  </TouchableOpacity>
-                  <TextInput
-                   style = {styles_four.input}
-                   placeholder = {item.item.TextInput}
-                   placeholderTextColor = "#ADD8e6"
-                  />
-                </View>
-                )}
+              renderItem = {renderItem}
             />
         </View>
       </View>
-    </ScrollView>
+      </ScrollView>
   </SafeAreaView>
   )
 }

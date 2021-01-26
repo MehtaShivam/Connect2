@@ -834,14 +834,14 @@ export default class App extends React.Component {
                   <Button
                   title='Back'
                   color="#ADD8e6"
-                   onPress={()=> Alert.alert("Needs functionality")}
+                   onPress={()=> Alert.alert("Add functionality")}
                    />
                  ),
               }}/>
               <Stack.Screen name="Sign Up" component={SignUp} options={{
                 headerLeft: () => (
                   <Button
-                    onPress={()=> Alert.alert("Needs functionality") }
+                    onPress={()=> Alert.alert("Add functionality") }
                     title="Back"
                     color="#ADD8e6"
                   />

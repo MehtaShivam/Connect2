@@ -7,13 +7,13 @@ import {
   Content,
   Footer
 } from 'native-base';
-
+import QRCode from 'react-native-qrcode-svg';
 
 function Share(props) {
   const { navigation } = props
   return (
     <SafeAreaView>
-    <Text>Hello world</Text>
+      <QRCode size={200} value="https://www.zapper.com" />
     </SafeAreaView>
   );
 }
