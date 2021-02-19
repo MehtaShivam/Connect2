@@ -1,15 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View} from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 
-export default function Header({navigation, title}){
+export default function Header({ navigation, title }) {
 
   const openMenu = () => {
-    navigation.openDrawer();
+    navigation.openDrawer()
   }
-  return(
-    <View style={styles.header}>
-    <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.icon}/>
+  return (
+    <View style={ styles.header }>
+      <MaterialIcons name='menu' size={ 28 } onPress={ openMenu } style={ styles.icon }/>
     </View>
   )
 }

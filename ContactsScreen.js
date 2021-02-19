@@ -1,57 +1,57 @@
-import React from 'react';
+import React from 'react'
 import {
+  ActivityIndicator,
+  FlatList,
+  SafeAreaView,
   StyleSheet,
   Text,
-  View,
   TextInput,
-  SafeAreaView,
-  FlatList,
-  ActivityIndicator
-} from 'react-native';
-import * as Contacts from 'expo-contacts';
-import * as Permissions from 'expo-permissions';
+  View
+} from 'react-native'
+import * as Contacts from 'expo-contacts'
+import * as Permissions from 'expo-permissions'
 
 export default class ContactScreen extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       isLoading: false,
       contacts: []
-    };
+    }
   }
 
   loadContacts = async () => {
     const permission = await Permissions.askAsync(
       Permissions.CONTACTS
-    );
+    )
 
     if (permission.status !== 'granted') {
-      return;
+      return
     }
 
     const { data } = await Contacts.getContactsAsync({
       fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Emails]
-    });
+    })
 
-    console.log(data);
-    this.setState({ contacts: data, inMemoryContacts: data, isLoading: false });
-  };
+    console.log(data)
+    this.setState({ contacts: data, inMemoryContacts: data, isLoading: false })
+  }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
-    this.loadContacts();
+    this.setState({ isLoading: true })
+    this.loadContacts()
   }
 
   renderItem = ({ item }) => (
-    <View style={{ minHeight: 70, padding: 5 }}>
-      <Text style={{ color: '#ADD8e6', fontWeight: 'bold', fontSize: 26 }}>
-        {item.firstName + ' '}
-        {item.lastName}
+    <View style={ { minHeight: 70, padding: 5 } }>
+      <Text style={ { color: '#ADD8e6', fontWeight: 'bold', fontSize: 26 } }>
+        { item.firstName + ' ' }
+        { item.lastName }
       </Text>
-      <Text style={{ color: 'white', fontWeight: 'bold' }}>
+      <Text style={ { color: 'white', fontWeight: 'bold' } }>
       </Text>
     </View>
-  );
+  )
 
   searchContacts = value => {
     const filteredContacts = this.state.inMemoryContacts.filter(contact => {
@@ -59,64 +59,64 @@ export default class ContactScreen extends React.Component {
         contact.firstName +
         ' ' +
         contact.lastName
-      ).toLowerCase();
+      ).toLowerCase()
 
-      let searchTermLowercase = value.toLowerCase();
+      let searchTermLowercase = value.toLowerCase()
 
-      return contactLowercase.indexOf(searchTermLowercase) > -1;
-    });
-    this.setState({ contacts: filteredContacts });
-  };
+      return contactLowercase.indexOf(searchTermLowercase) > -1
+    })
+    this.setState({ contacts: filteredContacts })
+  }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <SafeAreaView style={{ backgroundColor: '#ADD8e6' }} />
+      <View style={ { flex: 1 } }>
+        <SafeAreaView style={ { backgroundColor: '#ADD8e6' } }/>
         <TextInput
           placeholder="Search"
           placeholderTextColor="white"
-          style={{
+          style={ {
             backgroundColor: '#ADD8e6',
             height: 50,
             fontSize: 36,
             padding: 10,
             color: 'white',
-            borderBottomWidth: 0.5,
-          }}
-          onChangeText={value => this.searchContacts(value)}
+            borderBottomWidth: 0.5
+          } }
+          onChangeText={ value => this.searchContacts(value) }
         />
-        <View style={{ flex: 1 }}>
-          {this.state.isLoading ? (
+        <View style={ { flex: 1 } }>
+          { this.state.isLoading ? (
             <View
-              style={{
+              style={ {
                 ...StyleSheet.absoluteFill,
                 alignItems: 'center',
                 justifyContent: 'center'
-              }}
+              } }
             >
-              <ActivityIndicator size="large" color="#ADD8e6" />
+              <ActivityIndicator size="large" color="#ADD8e6"/>
             </View>
-          ) : null}
+          ) : null }
           <FlatList
-            data={this.state.contacts}
-            renderItem={this.renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            ListEmptyComponent={() => (
+            data={ this.state.contacts }
+            renderItem={ this.renderItem }
+            keyExtractor={ (item, index) => index.toString() }
+            ListEmptyComponent={ () => (
               <View
-                style={{
+                style={ {
                   flex: 1,
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginTop: 50
-                }}
+                } }
               >
-                <Text style={{ color: '#ADD8e6' }}>No Contacts Found</Text>
+                <Text style={ { color: '#ADD8e6' } }>No Contacts Found</Text>
               </View>
-            )}
+            ) }
           />
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -127,4 +127,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }
-});
+})
