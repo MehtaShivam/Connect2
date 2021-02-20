@@ -1,8 +1,8 @@
 //v13
-import * as React from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import * as React from 'react'
+import { SafeAreaView } from 'react-native'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import { Ionicons } from '@expo/vector-icons'
 import HamburgerNav from './HamburgerMenu'
 
 function ContactsScreen({ navigation }) {
@@ -10,16 +10,16 @@ function ContactsScreen({ navigation }) {
     const unsubscribe = navigation.addListener('tabPress', e => {
       // Prevent default behavior
       navigation.navigate('Contacts')
-    });
+    })
 
-    return unsubscribe;
-  }, [navigation]);
+    return unsubscribe
+  }, [navigation])
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-    <HamburgerNav name='Contacts'/>
+    <SafeAreaView style={ { flex: 1 } }>
+      <HamburgerNav name='Contacts'/>
     </SafeAreaView>
-  );
+  )
 }
 
 function ProfileScreen({ navigation }) {
@@ -27,16 +27,16 @@ function ProfileScreen({ navigation }) {
     const unsubscribe = navigation.addListener('tabPress', e => {
       // Prevent default behavior
       navigation.navigate('Profile')
-    });
+    })
 
-    return unsubscribe;
-  }, [navigation]);
+    return unsubscribe
+  }, [navigation])
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-    <HamburgerNav name='Profile'/>
+    <SafeAreaView style={ { flex: 1 } }>
+      <HamburgerNav name='Profile'/>
     </SafeAreaView>
-  );
+  )
 }
 
 function CaptureScreen({ navigation }) {
@@ -44,16 +44,16 @@ function CaptureScreen({ navigation }) {
     const unsubscribe = navigation.addListener('tabPress', e => {
       // Prevent default behavior
       navigation.navigate('Capture')
-    });
+    })
 
-    return unsubscribe;
-  }, [navigation]);
+    return unsubscribe
+  }, [navigation])
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-    <HamburgerNav name='Capture'/>
+    <SafeAreaView style={ { flex: 1 } }>
+      <HamburgerNav name='Capture'/>
     </SafeAreaView>
-  );
+  )
 }
 
 function ShareScreen({ navigation }) {
@@ -61,56 +61,55 @@ function ShareScreen({ navigation }) {
     const unsubscribe = navigation.addListener('tabPress', e => {
       // Prevent default behavior
       navigation.navigate('Share')
-    });
+    })
 
-    return unsubscribe;
-  }, [navigation]);
+    return unsubscribe
+  }, [navigation])
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-    <HamburgerNav name='Share'/>
+    <SafeAreaView style={ { flex: 1 } }>
+      <HamburgerNav name='Share'/>
     </SafeAreaView>
-  );
+  )
 }
 
-
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator()
 
 export default function NavBar() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+      screenOptions={ ({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName
 
-            if (route.name === 'Contacts') {
-              iconName = focused
-                ? 'person'
-                : 'person-outline';
-            } else if (route.name === 'Profile') {
-              iconName = focused ? 'home' : 'home-outline';
-            }else if (route.name === 'Capture') {
-              iconName = focused ? 'camera' : 'camera-outline';
-            }else if (route.name === 'Share') {
-              iconName = focused ? 'share' : 'share-outline';
-            }
+          if (route.name === 'Contacts') {
+            iconName = focused
+              ? 'person'
+              : 'person-outline'
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'home' : 'home-outline'
+          } else if (route.name === 'Capture') {
+            iconName = focused ? 'camera' : 'camera-outline'
+          } else if (route.name === 'Share') {
+            iconName = focused ? 'share' : 'share-outline'
+          }
 
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={20} color={color} />
-          },
-        })}
-        // tabBarOptions={{
-        //   activeTintColor: 'tomato',
-        //   inactiveTintColor: 'gray',
-        // }}
-        barStyle={{ backgroundColor: '#ADD8e6' }}
-        >
-        <Tab.Screen name="Contacts" component={ContactsScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Capture" component={CaptureScreen} />
-        <Tab.Screen name="Share" component={ShareScreen} />
-      </Tab.Navigator>
-  );
+          // You can return any component that you like here!
+          return <Ionicons name={ iconName } size={ 20 } color={ color }/>
+        }
+      }) }
+      // tabBarOptions={{
+      //   activeTintColor: 'tomato',
+      //   inactiveTintColor: 'gray',
+      // }}
+      barStyle={ { backgroundColor: '#ADD8e6' } }
+    >
+      <Tab.Screen name="Contacts" component={ ContactsScreen }/>
+      <Tab.Screen name="Profile" component={ ProfileScreen }/>
+      <Tab.Screen name="Capture" component={ CaptureScreen }/>
+      <Tab.Screen name="Share" component={ ShareScreen }/>
+    </Tab.Navigator>
+  )
 }
 
 //v1

@@ -746,8 +746,6 @@
 //
 // export default App;
 
-
-
 //v3
 // import React from 'react';
 //  import { Link, Switch, Route } from 'react-router';
@@ -785,70 +783,69 @@
 
 //v5
 
-import 'react-native-gesture-handler';
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableOpacity, View, Text, Button, TextInput, Image, ScrollView, StyleSheet, FlatList, SafeAreaView, Alert } from 'react-native';
-import * as firebase from 'firebase';
-import Home from './HomeScreen';
-import ForgotPassword from './ForgotPasswordScreen';
-import Share from './ShareScreen';
-import SignUp from './SignUpScreen';
-import AddProfile from './AddProfileScreen';
-import ApiKeys from './ApiKeys';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import NavAndDrawer from './NavBar2';
+import 'react-native-gesture-handler'
+import * as React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { Alert, Button } from 'react-native'
+import * as firebase from 'firebase'
+import Home from './HomeScreen'
+import ForgotPassword from './ForgotPasswordScreen'
+import Share from './ShareScreen'
+import SignUp from './SignUpScreen'
+import AddProfile from './AddProfileScreen'
+import ApiKeys from './ApiKeys'
+import NavAndDrawer from './NavBar2'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 export default class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    if(!firebase.apps.length){
-      firebase.initializeApp(ApiKeys.firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(ApiKeys.firebaseConfig)
     }
   }
-    render() {
-        return (
-          <NavigationContainer >
-            <Stack.Navigator>
-            <Stack.Screen
-                name="Home"
-                component={Home}
-                options={{headerShown: false}}
-              />
 
-              <Stack.Screen name="NavBar" component={NavAndDrawer} options={{
-                headerShown: false
-              }}/>
-              <Stack.Screen name="AddProfile" component={AddProfile} options={{
-                headerShown: false
-              }}/>
-              <Stack.Screen name="Share" component={Share} options={{
-                headerShown: false
-              }}/>
-              <Stack.Screen name="Forgot Password" component={ForgotPassword} options={{
-                headerLeft: () => (
-                  <Button
-                  title='Back'
-                  color="#ADD8e6"
-                   onPress={()=> Alert.alert("Add functionality")}
-                   />
-                 ),
-              }}/>
-              <Stack.Screen name="Sign Up" component={SignUp} options={{
-                headerLeft: () => (
-                  <Button
-                    onPress={()=> Alert.alert("Add functionality") }
-                    title="Back"
-                    color="#ADD8e6"
-                  />
-                ),
-              }}/>
-            </Stack.Navigator>
-            </NavigationContainer>
-          );
-    }
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={ Home }
+            options={ { headerShown: false } }
+          />
+
+          <Stack.Screen name="NavBar" component={ NavAndDrawer } options={ {
+            headerShown: false
+          } }/>
+          <Stack.Screen name="AddProfile" component={ AddProfile } options={ {
+            headerShown: false
+          } }/>
+          <Stack.Screen name="Share" component={ Share } options={ {
+            headerShown: false
+          } }/>
+          <Stack.Screen name="Forgot Password" component={ ForgotPassword } options={ {
+            headerLeft: () => (
+              <Button
+                title='Back'
+                color="#ADD8e6"
+                onPress={ () => Alert.alert('Add functionality') }
+              />
+            )
+          } }/>
+          <Stack.Screen name="Sign Up" component={ SignUp } options={ {
+            headerLeft: () => (
+              <Button
+                onPress={ () => Alert.alert('Add functionality') }
+                title="Back"
+                color="#ADD8e6"
+              />
+            )
+          } }/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+  }
 }
